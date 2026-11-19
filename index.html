@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070707">
+<title>MAS Jeopardy Buzzer</title>
+<style>
+  @font-face{font-family:"Barlow Condensed";src:url(assets/fonts/BarlowCondensed-ExtraBold.woff) format("woff");font-weight:800;font-display:block}
+  @font-face{font-family:"Barlow Condensed";src:url(assets/fonts/BarlowCondensed-BlackItalic.woff) format("woff");font-weight:900;font-style:italic;font-display:block}
+  @font-face{font-family:"Barlow";src:url(assets/fonts/Barlow-Regular.woff) format("woff");font-weight:400;font-display:swap}
+  @font-face{font-family:"Barlow";src:url(assets/fonts/Barlow-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+  @font-face{font-family:"Barlow";src:url(assets/fonts/Barlow-Bold.woff) format("woff");font-weight:700;font-display:swap}
+  :root{
+    --bg:#070707;--panel:#111;--line:#2a2a2a;--red:#e3141b;--red-hot:#ff3b3b;--text:#f4f4f4;--muted:#a3a3a3;--good:#22c55e;
+    --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;--body:"Barlow",Arial,sans-serif;
+    --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  html{color-scheme:dark}
+  ::selection{background:var(--red);color:#fff}
+  body{
+    background:radial-gradient(ellipse at 50% 30%,#2a0304 0%,#0a0000 60%,#000 100%) fixed,var(--bg);
+    color:var(--text);font-family:var(--body);letter-spacing:.005em;
+    min-height:100dvh;display:flex;flex-direction:column;
+    padding:max(var(--s4),env(safe-area-inset-top)) var(--s4) max(var(--s4),env(safe-area-inset-bottom));
+    -webkit-tap-highlight-color:transparent;
+  }
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:8px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:var(--s3)}
+  .logo{height:34px;width:auto}
+  .code{font:700 13px var(--body);color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  .code b{color:var(--text)}
+  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s5);text-align:center;width:min(460px,100%);margin:0 auto}
+  [hidden]{display:none!important}
+
+  /* join */
+  h1{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(40px,12vw,64px);line-height:.9}
+  h1 span{color:var(--red-hot)}
+  .lead{color:var(--muted);line-height:1.5;max-width:32ch}
+  form{display:flex;flex-direction:column;gap:var(--s3);width:100%}
+  label{display:flex;flex-direction:column;gap:var(--s2);text-align:left;font:600 14px var(--body);color:var(--muted)}
+  input{
+    font:800 24px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;color:var(--text);caret-color:var(--red);
+    background:#111;border:1px solid var(--line);border-radius:10px;padding:14px var(--s4);width:100%;
+  }
+  input:focus{outline:none;border-color:var(--red)}
+  .btn{
+    font:700 17px var(--body);letter-spacing:.02em;color:#fff;cursor:pointer;
+    background:linear-gradient(180deg,#d8121a,#8d0509);border:1px solid rgba(255,90,90,.35);
+    padding:15px var(--s5);border-radius:10px;width:100%;
+  }
+  .btn:disabled{opacity:.5;cursor:default}
+  .err{color:var(--red-hot);font-weight:600;min-height:1.4em}
+
+  /* play */
+  .team{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(26px,8vw,40px);line-height:1;display:flex;align-items:center;gap:var(--s3);justify-content:center;flex-wrap:wrap}
+  .link{background:none;border:none;color:var(--muted);font:500 14px var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer;letter-spacing:0;text-transform:none}
+  .clue{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--red-hot);font-size:20px;min-height:1.2em}
+  .clue .v{color:var(--text);font-weight:900;font-style:italic;letter-spacing:.01em;margin-left:.4em}
+  .buzz{
+    --size:min(72vw,50dvh,330px);
+    width:var(--size);height:var(--size);border-radius:50%;border:none;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;
+    font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:calc(var(--size)*.2);letter-spacing:.02em;color:#fff;
+    background:radial-gradient(circle at 50% 35%,#ff3b3b 0%,#c70f15 45%,#6a0306 100%);
+    box-shadow:inset 0 -10px 0 rgba(0,0,0,.35),inset 0 0 0 3px rgba(255,140,140,.45),0 14px 30px rgba(0,0,0,.6);
+    text-shadow:0 4px 0 rgba(0,0,0,.4);
+    transition:transform .1s,filter .15s,background .2s,color .2s;
+  }
+  .buzz:active:not(:disabled){transform:translateY(4px) scale(.98);box-shadow:inset 0 -4px 0 rgba(0,0,0,.35),inset 0 0 0 3px rgba(255,140,140,.45),0 6px 14px rgba(0,0,0,.6)}
+  .buzz:disabled{cursor:default;background:radial-gradient(circle at 50% 35%,#2a2a2a 0%,#161616 60%,#0c0c0c 100%);color:#8a8a8a;text-shadow:none;box-shadow:inset 0 -8px 0 rgba(0,0,0,.4),inset 0 0 0 2px #2a2a2a,0 10px 24px rgba(0,0,0,.6)}
+  .buzz.up{background:radial-gradient(circle at 50% 35%,#4ade80 0%,#16a34a 50%,#0b4d24 100%);color:#fff;box-shadow:inset 0 -10px 0 rgba(0,0,0,.3),inset 0 0 0 3px rgba(160,255,190,.5),0 14px 30px rgba(0,0,0,.6)}
+  .buzz.pending{filter:brightness(.8)}
+  .status{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(22px,6.5vw,30px);line-height:1.1;min-height:2.2em;text-wrap:balance}
+  .status.good{color:var(--good)} .status.bad{color:var(--red-hot)}
+  .hint{color:#8c8c8c;font-size:14px}
+  @media (hover:none){.hint{display:none}}
+  footer{display:flex;justify-content:center;align-items:center;gap:var(--s2);color:var(--muted);font-size:13px;padding-top:var(--s3)}
+  .dot{width:8px;height:8px;border-radius:50%;background:#666}
+  .dot.live{background:var(--good)} .dot.bad{background:var(--red-hot)}
+  @media (prefers-reduced-motion:reduce){.buzz{transition:none}.buzz:active:not(:disabled){transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" src="assets/mas-logo.png" alt="MAS mobile auto solutions">
+  <div class="code" id="codeTag" hidden>Game <b id="codeTxt"></b></div>
+</header>
+
+<main id="joinView">
+  <h1>MAS <span>Jeopardy</span></h1>
+  <p class="lead">Join with your team name. Your screen becomes your buzzer.</p>
+  <form id="joinForm" autocomplete="off">
+    <label id="codeField">Game code<input id="codeIn" maxlength="6" inputmode="text" autocapitalize="characters" placeholder="ABCD"></label>
+    <label>Team name<input id="nameIn" maxlength="24" autocapitalize="words" placeholder="Team name"></label>
+    <div class="err" id="joinErr" role="alert"></div>
+    <button class="btn" id="joinBtn" type="submit">Join game</button>
+  </form>
+</main>
+
+<main id="playView" hidden>
+  <div class="team"><span id="teamName"></span><button class="link" id="renameBtn" type="button">Change name</button></div>
+  <div class="clue" id="clueTxt" aria-live="polite"></div>
+  <button class="buzz" id="buzzBtn" disabled>Wait</button>
+  <div class="status" id="statusTxt" aria-live="assertive"></div>
+  <div class="hint">Tip: press the Space bar to buzz.</div>
+</main>
+
+<footer id="foot" hidden><span class="dot" id="dot"></span><span id="connTxt">Connecting…</span></footer>
+
+<script>
+/* ---------- config ---------- */
+const FIREBASE = { databaseURL: "https://mas-jeopardy-default-rtdb.firebaseio.com" };
+const params = new URLSearchParams(location.search);
+const DB = (params.get("db") || FIREBASE.databaseURL).replace(/\/$/, "");
+const $ = id => document.getElementById(id);
+
+/* ---------- tiny Firebase Realtime Database client (REST + streaming) ---------- */
+function fb(base){
+  const url = p => `${base}/${p}.json`;
+  const req = (method, p, v) => fetch(url(p), { method, body: v === undefined ? undefined : JSON.stringify(v) })
+    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  function setAt(root, path, val){
+    const ks = path.split("/").filter(Boolean);
+    if (!ks.length) return val ?? null;
+    root = (root && typeof root === "object") ? structuredClone(root) : {};
+    let cur = root;
+    for (const k of ks.slice(0,-1)){ if (!cur[k] || typeof cur[k] !== "object") cur[k] = {}; cur = cur[k]; }
+    if (val === null || val === undefined) delete cur[ks.at(-1)]; else cur[ks.at(-1)] = val;
+    return root;
+  }
+  return {
+    get: p => req("GET", p), put: (p,v) => req("PUT", p, v), patch: (p,v) => req("PATCH", p, v), del: p => req("DELETE", p),
+    listen(p, onData, onStatus){
+      let tree = null, es = null, stopped = false, wait = 1000;
+      const open = () => {
+        if (stopped) return;
+        es = new EventSource(url(p));
+        es.onopen = () => { wait = 1000; onStatus("live"); };
+        es.addEventListener("put", e => { const d = JSON.parse(e.data); tree = setAt(tree, d.path, d.data); onData(tree); });
+        es.addEventListener("patch", e => { const d = JSON.parse(e.data); for (const [k,v] of Object.entries(d.data || {})) tree = setAt(tree, d.path.replace(/\/$/,"") + "/" + k, v); onData(tree); });
+        es.addEventListener("cancel", () => { onStatus("error"); });
+        es.onerror = () => {
+          onStatus("connecting");
+          if (es.readyState === EventSource.CLOSED){ es.close(); setTimeout(open, wait); wait = Math.min(wait*2, 15000); }
+        };
+      };
+      open();
+      return () => { stopped = true; es && es.close(); };
+    }
+  };
+}
+const db = fb(DB);
+
+/* ---------- local identity ---------- */
+const KEY = "mas-buzzer-v1";
+let me = {}; try { me = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
+const saveMe = () => { try { localStorage.setItem(KEY, JSON.stringify(me)); } catch(e){} };
+if (!me.tid){ me.tid = "t" + Math.random().toString(36).slice(2, 10); saveMe(); }
+const urlCode = (params.get("game") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+let code = urlCode || me.code || "";
+let game = null, stop = null, joined = false, pendingRid = null, heartbeat = 0;
+
+/* ---------- views ---------- */
+function showJoin(msg){
+  joined = false; clearInterval(heartbeat);
+  $("joinView").hidden = false; $("playView").hidden = true;
+  $("codeField").hidden = !!urlCode;
+  $("codeIn").value = code; $("nameIn").value = me.name || "";
+  $("joinErr").textContent = msg || "";
+  (urlCode ? $("nameIn") : (code ? $("nameIn") : $("codeIn"))).focus({preventScroll:true});
+}
+function showPlay(){
+  $("joinView").hidden = true; $("playView").hidden = false;
+  $("codeTag").hidden = false; $("codeTxt").textContent = code;
+  render();
+}
+function setConn(s){
+  $("foot").hidden = false;
+  $("dot").className = "dot " + (s === "live" ? "live" : s === "error" ? "bad" : "");
+  $("connTxt").textContent = s === "live" ? "Connected" : s === "error" ? "Can't reach the game" : "Connecting…";
+}
+
+/* ---------- join ---------- */
+$("joinForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const c = ($("codeIn").value || code).toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const name = $("nameIn").value.trim().replace(/\s+/g, " ");
+  if (!c) return $("joinErr").textContent = "Enter the game code from the host.";
+  if (!name) return $("joinErr").textContent = "Enter a team name.";
+  $("joinBtn").disabled = true; $("joinErr").textContent = "";
+  try {
+    const g = await db.get(`games/${c}`);
+    if (!g || !g.meta) throw new Error("nogame");
+    const clash = Object.entries(g.teams || {}).find(([id,t]) => id !== me.tid && (t.name||"").toLowerCase() === name.toLowerCase());
+    if (clash) throw new Error("taken");
+    await db.patch(`games/${c}/teams/${me.tid}`, { name, seen:{".sv":"timestamp"}, joinedAt:{".sv":"timestamp"} });
+    code = c; me.code = c; me.name = name; saveMe();
+    startListening(); joined = true; startHeartbeat(); showPlay();
+  } catch(err){
+    $("joinErr").textContent = err.message === "nogame" ? "No game with that code. Check with the host."
+      : err.message === "taken" ? "Another team already has that name."
+      : "Couldn't connect. Check your internet and try again.";
+  } finally { $("joinBtn").disabled = false; }
+});
+$("renameBtn").onclick = () => showJoin();
+
+function startHeartbeat(){
+  clearInterval(heartbeat);
+  heartbeat = setInterval(() => { if (joined && game && game.teams && game.teams[me.tid]) db.patch(`games/${code}/teams/${me.tid}`, { seen:{".sv":"timestamp"} }).catch(()=>{}); }, 20000);
+}
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && joined && game && game.teams && game.teams[me.tid]) db.patch(`games/${code}/teams/${me.tid}`, { seen:{".sv":"timestamp"} }).catch(()=>{});
+});
+
+function startListening(){
+  if (stop) stop();
+  stop = db.listen(`games/${code}`, data => {
+    game = data;
+    if (joined && (!game || !game.teams || !game.teams[me.tid])) { showJoin("The host removed your team. Join again if that was a mistake."); return; }
+    render();
+  }, setConn);
+}
+
+/* ---------- buzzing ---------- */
+function state(){
+  const r = (game && game.round) || { status:"idle" };
+  const mine = r.rid && game.buzzes && game.buzzes[r.rid] && game.buzzes[r.rid][me.tid];
+  const out = !!(r.out && r.out[me.tid]);
+  return { r, mine, out };
+}
+function canBuzz(){ const { r, mine, out } = state(); return joined && r.status === "open" && !out && !mine && pendingRid !== r.rid; }
+let actx = null;
+function click(){
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime;
+    o.type = "square"; o.frequency.value = 660; g.gain.setValueAtTime(.12, t); g.gain.exponentialRampToValueAtTime(.0001, t + .12);
+    o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + .13);
+  } catch(e){}
+}
+function buzz(){
+  if (!canBuzz()) return;
+  const rid = game.round.rid;
+  pendingRid = rid; render();
+  if (navigator.vibrate) navigator.vibrate(60);
+  click();
+  db.put(`games/${code}/buzzes/${rid}/${me.tid}`, { at:{".sv":"timestamp"} })
+    .catch(() => { pendingRid = null; render(); $("statusTxt").textContent = "Buzz didn't send. Try again."; });
+}
+$("buzzBtn").addEventListener("pointerdown", e => { e.preventDefault(); buzz(); });
+$("buzzBtn").addEventListener("click", e => { if (e.detail === 0) buzz(); });   // keyboard activation
+document.addEventListener("keydown", e => {
+  if ($("playView").hidden || e.target.tagName === "INPUT") return;
+  if (e.code === "Space" || e.key === "Enter"){ e.preventDefault(); buzz(); }
+});
+
+/* ---------- render ---------- */
+function render(){
+  if (!joined) return;
+  const { r, mine, out } = state();
+  const t = (game && game.teams) || {};
+  $("teamName").textContent = (t[me.tid] && t[me.tid].name) || me.name || "";
+  $("clueTxt").innerHTML = "";
+  if (r.status && r.status !== "idle" && r.cat){
+    $("clueTxt").textContent = r.cat;
+    const v = document.createElement("span"); v.className = "v"; v.textContent = "$" + r.value; $("clueTxt").appendChild(v);
+  }
+  if (pendingRid && pendingRid !== r.rid) pendingRid = null;
+  const btn = $("buzzBtn"), st = $("statusTxt");
+  btn.className = "buzz"; st.className = "status";
+  let label = "Wait", text = "", live = false;
+  const order = r.rid && game.buzzes && game.buzzes[r.rid] ? Object.entries(game.buzzes[r.rid]).sort((a,b) => a[1].at - b[1].at).map(x => x[0]) : [];
+  if (r.status === "open"){
+    if (out){ text = "Locked out on this clue"; st.classList.add("bad"); }
+    else if (mine || pendingRid === r.rid){ label = "Buzzed"; btn.classList.add("pending"); text = "Buzzed in! Waiting for the host…"; }
+    else { label = "Buzz!"; live = true; text = "Buzzers are open"; }
+  } else if (r.status === "answering"){
+    if (r.first === me.tid){ label = "You're up"; btn.classList.add("up"); text = "Answer out loud!"; st.classList.add("good"); }
+    else {
+      const who = (t[r.first] && t[r.first].name) || "Another team";
+      const pos = order.indexOf(me.tid);
+      text = `${who} buzzed first` + (pos > 0 ? ` · you were #${pos + 1}` : "");
+    }
+  } else if (r.status === "locked"){
+    text = r.first === me.tid && r.result === "correct" ? "Correct!" : "Clue closed";
+    if (r.first === me.tid && r.result === "correct") st.classList.add("good");
+  } else {
+    text = "Waiting for the next clue";
+  }
+  btn.textContent = label; btn.disabled = !live;
+  btn.setAttribute("aria-label", live ? "Buzz in" : label);
+  st.textContent = text;
+}
+
+/* ---------- start ---------- */
+if (code && me.name && me.code === code){
+  // rejoin silently after a refresh
+  db.get(`games/${code}/teams/${me.tid}`).then(t => {
+    if (t){ startListening(); joined = true; startHeartbeat(); showPlay(); }
+    else showJoin();
+  }).catch(() => showJoin("Couldn't connect. Check your internet and try again."));
+} else showJoin();
+</script>
+</body>
+</html>
