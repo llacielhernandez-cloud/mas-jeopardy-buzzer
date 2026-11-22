@@ -54,12 +54,74 @@
   }
   .btn:disabled{opacity:.5;cursor:default}
   .err{color:var(--red-hot);font-weight:600;min-height:1.4em}
+  #cancelBtn{align-self:center;padding:var(--s2)}
 
   /* play */
   .team{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(26px,8vw,40px);line-height:1;display:flex;align-items:center;gap:var(--s3);justify-content:center;flex-wrap:wrap}
   .link{background:none;border:none;color:var(--muted);font:500 14px var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer;letter-spacing:0;text-transform:none}
   .clue{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--red-hot);font-size:20px;min-height:1.2em}
   .clue .v{color:var(--text);font-weight:900;font-style:italic;letter-spacing:.01em;margin-left:.4em}
+  .fjp{width:100%;display:flex;flex-direction:column;align-items:stretch;gap:var(--s3);text-align:center}
+  .fjp-title{font:900 italic clamp(36px,11vw,54px)/.95 var(--display);text-transform:uppercase;color:var(--red-hot)}
+  .fjp-cat{font:800 clamp(24px,7vw,32px)/1.1 var(--display);text-transform:uppercase;letter-spacing:.05em;text-wrap:balance}
+  .fjp-body{display:flex;flex-direction:column;gap:var(--s3)}
+  .fjp-note{color:var(--muted);font:600 15px/1.45 var(--body)}
+  .fjp-big{font:900 italic clamp(28px,9vw,40px)/1.05 var(--display);text-transform:uppercase}
+  .fjp-big.good{color:var(--good)} .fjp-big.bad{color:var(--red-hot)}
+  .fjp-money{display:flex;flex-direction:row;align-items:center;gap:var(--s2);background:#111;border:1px solid var(--line);border-radius:10px;padding:0 var(--s4)}
+  .fjp-money:focus-within{border-color:var(--red)}
+  .fjp-money span{font:900 italic 34px var(--display);color:var(--muted)}
+  .fjp-money input{flex:1;min-width:0;width:auto;border:none;background:transparent;padding:14px 0;font:900 italic 34px/1 var(--display);font-variant-numeric:tabular-nums}
+  .fjp-money input:focus{outline:none}
+  .fjp textarea{font:800 22px/1.2 var(--display);text-transform:uppercase;letter-spacing:.03em;color:var(--text);caret-color:var(--red);background:#111;border:1px solid var(--line);border-radius:10px;padding:14px var(--s4);width:100%;min-height:110px;resize:vertical}
+  .fjp textarea:focus{outline:none;border-color:var(--red)}
+  .toss{width:100%;display:flex;flex-direction:column;align-items:center;gap:var(--s3);text-align:center}
+  .coin-stage{height:210px;display:grid;place-items:center;perspective:1000px}
+  .coin-hop{filter:drop-shadow(0 18px 22px rgba(0,0,0,.55))}
+  .coin{--d:170px;width:var(--d);height:var(--d);position:relative;transform-style:preserve-3d}
+  .ce{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,#e3e6ea 0deg 1.2deg,#8a9098 1.2deg 2.4deg,#4f555c 2.4deg 3.6deg)}
+  .cface{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(6px);
+    background:conic-gradient(from 210deg,rgba(255,255,255,.55),rgba(20,22,26,.45) 25%,rgba(255,255,255,.5) 50%,rgba(20,22,26,.4) 75%,rgba(255,255,255,.55)),repeating-conic-gradient(from 0deg,#f4f6f8 0deg 1.2deg,#b3b9c0 1.2deg 2.4deg,#6c727a 2.4deg 3.6deg);
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),inset 0 0 0 3px rgba(40,44,50,.5)}
+  .cface.tails{transform:rotateX(180deg) translateZ(6px)}
+  .crim{position:absolute;inset:10px;border-radius:50%;background:conic-gradient(from 200deg,#f7f8fa,#9aa1a9 20%,#e4e7eb 38%,#7c828a 55%,#eef0f3 72%,#a3a9b1 88%,#f7f8fa);box-shadow:0 0 0 2px #5d636a,0 0 0 3px rgba(255,255,255,.6),inset 0 1px 2px rgba(255,255,255,.9),inset 0 -2px 3px rgba(0,0,0,.45)}
+  .cimg{position:absolute;inset:17px;border-radius:50%;overflow:hidden;background:#050505;box-shadow:0 0 0 2px #4b5057,inset 0 4px 12px rgba(0,0,0,.85)}
+  .cimg img{width:100%;height:100%;object-fit:cover;display:block}
+  .cimg::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(140deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 68%,rgba(255,255,255,.08) 100%);box-shadow:inset 0 4px 12px rgba(0,0,0,.7)}
+  .toss-res{font:900 italic clamp(26px,8vw,34px)/1.05 var(--display);text-transform:uppercase;min-height:1.1em}
+  .toss-res.good{color:var(--good)} .toss-res.bad{color:var(--red-hot)}
+  .call-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);width:100%}
+  .call{font:900 italic clamp(26px,8vw,34px)/1 var(--display);text-transform:uppercase;color:#fff;cursor:pointer;border-radius:12px;padding:18px 0;border:none;
+    background:linear-gradient(160deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 38%),linear-gradient(180deg,#c70f15 0%,#8d0509 60%,#5a0205 100%);
+    text-shadow:0 3px 0 rgba(0,0,0,.45);box-shadow:inset 0 0 0 1px rgba(255,90,90,.35),0 4px 10px rgba(0,0,0,.5)}
+  .call:active:not(:disabled){transform:translateY(2px)}
+  .call:disabled{opacity:.45;cursor:default}
+  .tally{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;min-height:34px}
+  .tally span{width:30px;height:30px;border-radius:50%;overflow:hidden;border:2px dashed #444}
+  .tally span img{width:100%;height:100%;object-fit:cover;display:block}
+  .tally span.hit{border:3px solid var(--good)} .tally span.miss{border:3px solid var(--bad)}
+  .tally span.miss img{filter:grayscale(.85) brightness(.75)}
+  .pickpanel{width:100%;display:flex;flex-direction:column;align-items:stretch;gap:var(--s3);text-align:center}
+  .pick-title{font:900 italic clamp(32px,10vw,48px)/1 var(--display);text-transform:uppercase;color:var(--good)}
+  .pick-sub{color:var(--muted);font:600 15px var(--body);min-height:1.3em}
+  .pick-list{display:grid;gap:var(--s2)}
+  .pick-list.vals{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+  .cat-btn{
+    font:800 clamp(20px,6vw,26px)/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;color:#fff;cursor:pointer;
+    background:linear-gradient(180deg,#1d1d1d,#121212);border:1px solid #333;border-bottom:3px solid var(--red);border-radius:10px;padding:14px var(--s4);
+    display:flex;justify-content:space-between;align-items:center;gap:var(--s3);text-align:left;
+  }
+  .cat-btn small{font:600 13px var(--body);color:var(--muted);letter-spacing:0;text-transform:none;white-space:nowrap}
+  .cat-btn:active:not(:disabled){transform:translateY(1px)}
+  .cat-btn:disabled{opacity:.4;cursor:default;border-bottom-color:#333}
+  .val-btn{
+    font:900 italic clamp(30px,9vw,40px)/1 var(--display);color:#fff;cursor:pointer;border:none;border-radius:10px;padding:16px 0;
+    background:linear-gradient(160deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 38%),linear-gradient(180deg,#c70f15 0%,#8d0509 60%,#5a0205 100%);
+    text-shadow:0 3px 0 rgba(0,0,0,.45);box-shadow:inset 0 0 0 1px rgba(255,90,90,.35),0 4px 10px rgba(0,0,0,.5);font-variant-numeric:tabular-nums;
+  }
+  .val-btn:active:not(:disabled){transform:translateY(2px)}
+  .val-btn:disabled{opacity:.6;cursor:default}
+  #pickBack{align-self:center;padding:var(--s2)}
   .buzz{
     --size:min(72vw,50dvh,330px);
     width:var(--size);height:var(--size);border-radius:50%;border:none;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;
@@ -81,6 +143,39 @@
   .dot{width:8px;height:8px;border-radius:50%;background:#666}
   .dot.live{background:var(--good)} .dot.bad{background:var(--red-hot)}
   @media (prefers-reduced-motion:reduce){.buzz{transition:none}.buzz:active:not(:disabled){transform:none}}
+  /* team look: avatars + signatures */
+  .av{--av:48px;width:var(--av);height:var(--av);border-radius:50%;flex:none;display:grid;place-items:center;overflow:hidden;
+      background:#1a0506;box-shadow:inset 0 0 0 2px rgba(255,120,120,.45),0 2px 6px rgba(0,0,0,.5)}
+  .av img{width:100%;height:100%;object-fit:cover;display:block}
+  .av.ico{background:radial-gradient(circle at 50% 32%,#ef2a30 0%,#a80a10 55%,#4a0204 100%);color:#fff}
+  .av .glyph{width:74%;height:74%;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .av .glyph .f{fill:currentColor;stroke:none}
+  .av.ini{font:900 italic calc(var(--av)*.44)/1 "Barlow Condensed","Arial Narrow",Arial,sans-serif;color:#fff;background:linear-gradient(180deg,#2c2c2c,#141414);letter-spacing:.02em;padding-right:.06em}
+  .sig{display:block;height:var(--sig-h,30px);width:auto;max-width:100%;overflow:visible}
+  .sig path{fill:none;stroke:#fff;stroke-width:var(--sig-w,2.6px);stroke-linecap:round;stroke-linejoin:round}
+
+  /* join: signature + picture */
+  .field{display:flex;flex-direction:column;gap:var(--s2);text-align:left}
+  .field-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);font:600 14px var(--body);color:var(--muted)}
+  .pad{position:relative;height:150px;border-radius:10px;background:linear-gradient(180deg,#140304,#0b0b0b);border:1px solid var(--line);overflow:hidden;transition:border-color .15s}
+  .pad.active{border-color:var(--red)}
+  .pad::before{content:"";position:absolute;left:var(--s4);right:var(--s4);top:72%;border-top:1px dashed #4a1a1c;pointer-events:none}
+  .pad canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}   /* drawing surface runs edge to edge on purpose */
+  .pad-hint{position:absolute;inset:0;display:grid;place-items:center;padding:0 var(--s4);color:#7a7a7a;font:600 15px var(--body);text-align:center;pointer-events:none}
+  .pics{border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--s2);text-align:left;min-width:0}
+  .pics legend{font:600 14px var(--body);color:var(--muted);margin-bottom:var(--s2);padding:0}
+  .pic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:var(--s2)}
+  .pick{display:grid;place-items:center;aspect-ratio:1;border-radius:12px;background:#111;border:1px solid var(--line);cursor:pointer;padding:4px;color:var(--muted);transition:border-color .15s,background-color .15s}
+  .pick:hover{border-color:#555}
+  .pick[aria-pressed="true"]{border-color:#fff;background:#1d0a0b;box-shadow:inset 0 0 0 2px var(--red)}
+  .pick .av{--av:46px}
+  .pick.photo{gap:2px;font:600 12px var(--body)}
+  .pick.photo svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  /* play: the team's own look */
+  .me{display:flex;flex-direction:column;align-items:center;gap:var(--s2)}
+  .me .av{--av:64px}
+  #teamName{display:flex;justify-content:center;max-width:100%}
+  #teamName .sig{--sig-h:54px;--sig-w:3px;max-width:min(82vw,420px)}
 </style>
 </head>
 <body>
@@ -91,18 +186,50 @@
 
 <main id="joinView">
   <h1>MAS <span>Jeopardy</span></h1>
-  <p class="lead">Join with your team name. Your screen becomes your buzzer.</p>
+  <p class="lead" id="joinLead">Join with your team name. Your screen becomes your buzzer.</p>
   <form id="joinForm" autocomplete="off">
     <label id="codeField">Game code<input id="codeIn" maxlength="6" inputmode="text" autocapitalize="characters" placeholder="ABCD"></label>
     <label>Team name<input id="nameIn" maxlength="24" autocapitalize="words" placeholder="Team name"></label>
+    <div class="field">
+      <div class="field-head"><span id="sigLabel">Sign your team name, like on the show</span><button type="button" class="link" id="sigClear">Clear</button></div>
+      <div class="pad" id="pad"><canvas id="sigCanvas" aria-labelledby="sigLabel"></canvas><span class="pad-hint" id="padHint">Write it here with your finger</span></div>
+    </div>
+    <fieldset class="pics">
+      <legend>Pick your picture</legend>
+      <div class="pic-grid" id="picGrid"></div>
+      <input type="file" id="photoIn" accept="image/*" hidden>
+    </fieldset>
     <div class="err" id="joinErr" role="alert"></div>
     <button class="btn" id="joinBtn" type="submit">Join game</button>
+    <button class="link" id="cancelBtn" type="button" hidden>Cancel, keep things as they are</button>
   </form>
 </main>
 
 <main id="playView" hidden>
-  <div class="team"><span id="teamName"></span><button class="link" id="renameBtn" type="button">Change name</button></div>
+  <div class="me"><span id="meAv"></span><div class="team" id="teamName"></div><button class="link" id="renameBtn" type="button">Edit team</button></div>
   <div class="clue" id="clueTxt" aria-live="polite"></div>
+  <section class="fjp" id="fjPanel" hidden aria-labelledby="fjpTitle">
+    <h2 class="fjp-title" id="fjpTitle">Final Jeopardy</h2>
+    <div class="fjp-cat" id="fjpCat"></div>
+    <div class="fjp-body" id="fjpBody"></div>
+  </section>
+  <section class="toss" id="tossPanel" hidden aria-labelledby="tossTitle">
+    <h2 class="pick-title" id="tossTitle">Coin toss</h2>
+    <p class="pick-sub" id="tossSub"></p>
+    <div class="coin-stage"><div class="coin-hop" id="coinHop"><div class="coin" id="coin"><div class="ce" style="transform:translateZ(-5.00px)"></div><div class="ce" style="transform:translateZ(-3.75px)"></div><div class="ce" style="transform:translateZ(-2.50px)"></div><div class="ce" style="transform:translateZ(-1.25px)"></div><div class="ce" style="transform:translateZ(0.00px)"></div><div class="ce" style="transform:translateZ(1.25px)"></div><div class="ce" style="transform:translateZ(2.50px)"></div><div class="ce" style="transform:translateZ(3.75px)"></div><div class="ce" style="transform:translateZ(5.00px)"></div>
+      <div class="cface heads"><div class="crim"></div><div class="cimg"><img src="assets/coin-heads.jpg" alt=""></div></div>
+      <div class="cface tails"><div class="crim"></div><div class="cimg"><img src="assets/coin-tails.jpg" alt=""></div></div>
+    </div></div></div>
+    <div class="toss-res" id="tossRes" aria-live="polite"></div>
+    <div class="call-row" id="callRow"><button class="call" type="button" data-c="H">Heads</button><button class="call" type="button" data-c="T">Tails</button></div>
+    <div class="tally" id="tally" aria-label="Your flips"></div>
+  </section>
+  <section class="pickpanel" id="pickPanel" hidden aria-labelledby="pickTitle">
+    <h2 class="pick-title" id="pickTitle">Your pick!</h2>
+    <p class="pick-sub" id="pickSub">Choose a category</p>
+    <div class="pick-list" id="pickList"></div>
+    <button class="link" id="pickBack" type="button" hidden>Back to categories</button>
+  </section>
   <button class="buzz" id="buzzBtn" disabled>Wait</button>
   <div class="status" id="statusTxt" aria-live="assertive"></div>
   <div class="hint">Tip: press the Space bar to buzz.</div>
@@ -111,6 +238,68 @@
 <footer id="foot" hidden><span class="dot" id="dot"></span><span id="connTxt">Connecting…</span></footer>
 
 <script>
+/* ---------- Team look: premade icons, avatars, signatures (shared by board + buzzer) ---------- */
+const TEAM_ICONS = {
+  wrench: '<path d="M31.5 11.5a7.5 7.5 0 0 0-9.3 9.6L12.4 30.9a2.9 2.9 0 0 0 4.1 4.1l9.8-9.8a7.5 7.5 0 0 0 9.6-9.3l-4.4 4.4-3.9-.8-.8-3.9z"/>',
+  tire:   '<circle cx="24" cy="24" r="13.5"/><circle cx="24" cy="24" r="8.5"/><circle cx="24" cy="24" r="2.6"/><path d="M24 10.5v3M24 34.5v3M10.5 24h3M34.5 24h3M14.5 14.5l2.1 2.1M31.4 31.4l2.1 2.1M33.5 14.5l-2.1 2.1M16.6 31.4l-2.1 2.1"/>',
+  plug:   '<path d="M21 9h6v4h-6zM20 13h8l-1 10h-6zM18 23h12v6H18zM20 29h8M20 32h8M24 29v8M24 37h5v-2.5"/>',
+  piston: '<path d="M15 11h18v11H15zM15 15h18M15 18.5h18M20.5 22l-1.5 9M27.5 22l1.5 9"/><circle cx="24" cy="34.5" r="4.5"/>',
+  turbo:  '<circle cx="24" cy="24" r="13.5"/><circle cx="24" cy="24" r="3.5"/><path transform="rotate(0 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/><path transform="rotate(60 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/><path transform="rotate(120 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/><path transform="rotate(180 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/><path transform="rotate(240 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/><path transform="rotate(300 24 24)" d="M24 20.5c.4-4.3 2.9-7.2 7-8.2"/>',
+  gauge:  '<path d="M11 31a13 13 0 1 1 26 0M14 23.5l2.4 1.4M24 13.5v2.8M34 23.5l-2.4 1.4M24 31l7.5-8.5M11 35h26"/><circle cx="24" cy="31" r="2.2"/>',
+  bolt:   '<path d="M27.5 8.5L14 27h9.5l-3 12.5L34 21h-9.5z"/>',
+  flag:   '<path d="M14 9.5v29M14 11h21v14H14"/><path class="f" d="M14 11h5.25v4.67H14zM24.5 11h5.25v4.67H24.5zM19.25 15.67h5.25v4.66h-5.25zM29.75 15.67H35v4.66h-5.25zM14 20.33h5.25V25H14zM24.5 20.33h5.25V25H24.5z"/>',
+  car:    '<path d="M10.5 29l3.4-9.2a3 3 0 0 1 2.8-1.9h14.6a3 3 0 0 1 2.8 1.9l3.4 9.2v6h-27zM14.5 24.5h19M13.5 35v3.5h4.5V35M30 35v3.5h4.5V35"/><circle cx="16.5" cy="30" r="1.8"/><circle cx="31.5" cy="30" r="1.8"/>',
+  wheel:  '<circle cx="24" cy="24" r="13.5"/><circle cx="24" cy="24" r="4"/><path d="M10.5 22.5h9.5M28 22.5h9.5M24 28v9.5"/>',
+  socket: '<path d="M24 11.5l10.8 6.25v12.5L24 36.5l-10.8-6.25v-12.5z"/><path d="M24 19.5l3.9 2.25v4.5L24 28.5l-3.9-2.25v-4.5z"/>',
+  oil:    '<path d="M24 9.5c5.5 7.4 9.5 12.6 9.5 17.8a9.5 9.5 0 0 1-19 0c0-5.2 4-10.4 9.5-17.8zM19.5 27.5a4.5 4.5 0 0 0 4.5 4.5"/>'
+};
+const ICON_IDS = Object.keys(TEAM_ICONS);
+const ICON_LABELS = { wrench:"Wrench", tire:"Tire", plug:"Spark plug", piston:"Piston", turbo:"Turbo", gauge:"Gauge", bolt:"Bolt", flag:"Checkered flag", car:"Car", wheel:"Steering wheel", socket:"Socket", oil:"Oil drop" };
+const SVGNS = "http://www.w3.org/2000/svg";
+
+function iconSvg(id){
+  const s = document.createElementNS(SVGNS, "svg");
+  s.setAttribute("viewBox", "0 0 48 48"); s.setAttribute("aria-hidden", "true"); s.classList.add("glyph");
+  s.innerHTML = TEAM_ICONS[id] || TEAM_ICONS.wrench;     // our own constants only
+  return s;
+}
+/* a picture is "icon:<id>" or a small JPEG/PNG data URL; anything else is ignored */
+function safePic(pic){
+  if (typeof pic !== "string") return null;
+  if (pic.startsWith("icon:") && TEAM_ICONS[pic.slice(5)]) return pic;
+  if (/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(pic) && pic.length < 120000) return pic;
+  return null;
+}
+/* a signature is {v:"x y w h", d:"M.. Q.. L.."} using only path commands and numbers */
+function safeSig(sig){
+  if (!sig || typeof sig !== "object") return null;
+  if (typeof sig.v !== "string" || !/^-?[\d.]+ -?[\d.]+ [\d.]+ [\d.]+$/.test(sig.v)) return null;
+  if (typeof sig.d !== "string" || sig.d.length > 24000 || !/^[MLQ\d .\-]+$/.test(sig.d)) return null;
+  return sig;
+}
+function avatarEl(pic, name, size){
+  const a = document.createElement("span"); a.className = "av"; if (size) a.style.setProperty("--av", size + "px");
+  const p = safePic(pic);
+  if (p && p.startsWith("icon:")){ a.classList.add("ico"); a.appendChild(iconSvg(p.slice(5))); }
+  else if (p){ const img = document.createElement("img"); img.alt = ""; img.decoding = "async"; img.src = p; a.appendChild(img); }
+  else {
+    const words = (name || "").trim().split(/\s+/).filter(w => /[A-Za-z0-9]/.test(w));
+    a.classList.add("ini");
+    a.textContent = (words.length > 1 ? words[0][0] + words[1][0] : (words[0] || "?").slice(0, 1)).toUpperCase();
+  }
+  return a;
+}
+function signatureEl(sig, name){
+  const s = safeSig(sig); if (!s) return null;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("viewBox", s.v); svg.setAttribute("preserveAspectRatio", "xMinYMid meet");
+  svg.setAttribute("role", "img"); svg.setAttribute("aria-label", name || "Team signature"); svg.classList.add("sig");
+  const path = document.createElementNS(SVGNS, "path");
+  path.setAttribute("d", s.d); path.setAttribute("vector-effect", "non-scaling-stroke");
+  svg.appendChild(path);
+  return svg;
+}
+
 /* ---------- config ---------- */
 const FIREBASE = { databaseURL: "https://mas-jeopardy-default-rtdb.firebaseio.com" };
 const params = new URLSearchParams(location.search);
@@ -134,21 +323,30 @@ function fb(base){
   return {
     get: p => req("GET", p), put: (p,v) => req("PUT", p, v), patch: (p,v) => req("PATCH", p, v), del: p => req("DELETE", p),
     listen(p, onData, onStatus){
-      let tree = null, es = null, stopped = false, wait = 1000;
+      let tree = null, es = null, stopped = false, wait = 1000, last = Date.now();
+      const seen = () => { last = Date.now(); };
       const open = () => {
         if (stopped) return;
+        if (es) es.close();
+        seen();
         es = new EventSource(url(p));
-        es.onopen = () => { wait = 1000; onStatus("live"); };
-        es.addEventListener("put", e => { const d = JSON.parse(e.data); tree = setAt(tree, d.path, d.data); onData(tree); });
-        es.addEventListener("patch", e => { const d = JSON.parse(e.data); for (const [k,v] of Object.entries(d.data || {})) tree = setAt(tree, d.path.replace(/\/$/,"") + "/" + k, v); onData(tree); });
+        es.onopen = () => { wait = 1000; seen(); onStatus(navigator.onLine === false ? "connecting" : "live"); };
+        es.addEventListener("put", e => { seen(); const d = JSON.parse(e.data); tree = setAt(tree, d.path, d.data); onData(tree); });
+        es.addEventListener("patch", e => { seen(); const d = JSON.parse(e.data); for (const [k,v] of Object.entries(d.data || {})) tree = setAt(tree, d.path.replace(/\/$/,"") + "/" + k, v); onData(tree); });
+        es.addEventListener("keep-alive", seen);
         es.addEventListener("cancel", () => { onStatus("error"); });
         es.onerror = () => {
           onStatus("connecting");
           if (es.readyState === EventSource.CLOSED){ es.close(); setTimeout(open, wait); wait = Math.min(wait*2, 15000); }
         };
       };
+      // a stream can go quiet without erroring (sleep, network switch): Firebase sends keep-alives ~every 30s
+      const dog = setInterval(() => { if (!stopped && Date.now() - last > 70000){ onStatus("connecting"); open(); } }, 10000);
+      const offline = () => onStatus("connecting");
+      const online = () => { wait = 1000; open(); };
+      addEventListener("offline", offline); addEventListener("online", online);
       open();
-      return () => { stopped = true; es && es.close(); };
+      return () => { stopped = true; clearInterval(dog); removeEventListener("offline", offline); removeEventListener("online", online); es && es.close(); };
     }
   };
 }
@@ -161,16 +359,23 @@ const saveMe = () => { try { localStorage.setItem(KEY, JSON.stringify(me)); } ca
 if (!me.tid){ me.tid = "t" + Math.random().toString(36).slice(2, 10); saveMe(); }
 const urlCode = (params.get("game") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
 let code = urlCode || me.code || "";
-let game = null, stop = null, joined = false, pendingRid = null, heartbeat = 0;
+let pickCat = null, pickSent = null, tossBusy = false, coinAngle = 0, lastFlip = null;
+let game = null, stop = null, joined = false, pendingRid = null, heartbeat = 0, conn = "connecting", renaming = false;
 
 /* ---------- views ---------- */
-function showJoin(msg){
-  joined = false; clearInterval(heartbeat);
+function showJoin(msg, rename = false){
+  renaming = rename;
+  if (!rename){ joined = false; clearInterval(heartbeat); }
   $("joinView").hidden = false; $("playView").hidden = true;
-  $("codeField").hidden = !!urlCode;
+  $("codeField").hidden = !!urlCode || rename;
+  $("joinLead").textContent = rename ? "Update your team's name, signature or picture." : "Join with your team name. Your screen becomes your buzzer.";
+  $("joinBtn").textContent = rename ? "Save changes" : "Join game";
+  sizePad(); paintPicks();
+  $("cancelBtn").hidden = !rename;
   $("codeIn").value = code; $("nameIn").value = me.name || "";
   $("joinErr").textContent = msg || "";
-  (urlCode ? $("nameIn") : (code ? $("nameIn") : $("codeIn"))).focus({preventScroll:true});
+  ((urlCode || code || rename) ? $("nameIn") : $("codeIn")).focus({preventScroll:true});
+  if (rename) $("nameIn").select();
 }
 function showPlay(){
   $("joinView").hidden = true; $("playView").hidden = false;
@@ -178,6 +383,7 @@ function showPlay(){
   render();
 }
 function setConn(s){
+  conn = s; render();
   $("foot").hidden = false;
   $("dot").className = "dot " + (s === "live" ? "live" : s === "error" ? "bad" : "");
   $("connTxt").textContent = s === "live" ? "Connected" : s === "error" ? "Can't reach the game" : "Connecting…";
@@ -194,18 +400,110 @@ $("joinForm").addEventListener("submit", async e => {
   try {
     const g = await db.get(`games/${c}`);
     if (!g || !g.meta) throw new Error("nogame");
+    if (g.meta.full && !(g.teams && g.teams[me.tid])) throw new Error("full");
     const clash = Object.entries(g.teams || {}).find(([id,t]) => id !== me.tid && (t.name||"").toLowerCase() === name.toLowerCase());
     if (clash) throw new Error("taken");
-    await db.patch(`games/${c}/teams/${me.tid}`, { name, seen:{".sv":"timestamp"}, joinedAt:{".sv":"timestamp"} });
-    code = c; me.code = c; me.name = name; saveMe();
-    startListening(); joined = true; startHeartbeat(); showPlay();
+    if (!me.pic) me.pic = "icon:" + ICON_IDS[(Math.random() * ICON_IDS.length) | 0];
+    const sig = padPath();
+    await db.patch(`games/${c}/teams/${me.tid}`, { name, pic: me.pic, sig: sig || null, seen:{".sv":"timestamp"}, joinedAt:{".sv":"timestamp"} });
+    code = c; me.code = c; me.name = name; me.sig = sig || null; saveMe();
+    if (!renaming || !stop) startListening();
+    joined = true; renaming = false; startHeartbeat(); showPlay();
   } catch(err){
     $("joinErr").textContent = err.message === "nogame" ? "No game with that code. Check with the host."
       : err.message === "taken" ? "Another team already has that name."
+      : err.message === "full" ? "This game is full. Check with the host."
       : "Couldn't connect. Check your internet and try again.";
   } finally { $("joinBtn").disabled = false; }
 });
-$("renameBtn").onclick = () => showJoin();
+$("renameBtn").onclick = () => showJoin("", true);
+$("cancelBtn").onclick = () => { renaming = false; showPlay(); };
+
+/* ---------- signature pad: strokes kept in a 1000-wide space so they redraw at any size ---------- */
+let strokes = Array.isArray(me.strokes) ? me.strokes : [], live = null;
+const padCv = $("sigCanvas"), padCtx = padCv.getContext("2d");
+function sizePad(){
+  const r = padCv.getBoundingClientRect(); if (!r.width) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  padCv.width = Math.round(r.width * dpr); padCv.height = Math.round(r.height * dpr);
+  drawPad();
+}
+function drawPad(){
+  const w = padCv.width, k = w / 1000;
+  padCtx.clearRect(0, 0, w, padCv.height);
+  padCtx.strokeStyle = "#fff"; padCtx.lineCap = padCtx.lineJoin = "round"; padCtx.lineWidth = Math.max(3, 9 * k);
+  for (const st of strokes.concat(live ? [live] : [])){
+    padCtx.beginPath(); padCtx.moveTo(st[0][0]*k, st[0][1]*k);
+    if (st.length === 1) padCtx.lineTo(st[0][0]*k + .1, st[0][1]*k);
+    for (let i = 1; i < st.length - 1; i++){ const mx = (st[i][0] + st[i+1][0]) / 2, my = (st[i][1] + st[i+1][1]) / 2; padCtx.quadraticCurveTo(st[i][0]*k, st[i][1]*k, mx*k, my*k); }
+    if (st.length > 1){ const l = st.at(-1); padCtx.lineTo(l[0]*k, l[1]*k); }
+    padCtx.stroke();
+  }
+  $("padHint").hidden = strokes.length > 0 || !!live;
+}
+function padPoint(e){ const r = padCv.getBoundingClientRect(), u = 1000 / r.width; return [Math.round((e.clientX - r.left) * u * 10) / 10, Math.round((e.clientY - r.top) * u * 10) / 10]; }
+const totalPts = () => strokes.reduce((n, s) => n + s.length, 0);
+padCv.addEventListener("pointerdown", e => {
+  if (totalPts() > 1600) return;
+  e.preventDefault(); padCv.setPointerCapture(e.pointerId);
+  live = [padPoint(e)]; $("pad").classList.add("active"); drawPad();
+});
+padCv.addEventListener("pointermove", e => {
+  if (!live) return;
+  const p = padPoint(e), l = live.at(-1);
+  if (Math.hypot(p[0]-l[0], p[1]-l[1]) > 3) { live.push(p); drawPad(); }
+});
+const endStroke = () => { if (!live) return; strokes.push(live); live = null; $("pad").classList.remove("active"); me.strokes = strokes; saveMe(); drawPad(); };
+padCv.addEventListener("pointerup", endStroke); padCv.addEventListener("pointercancel", endStroke);
+$("sigClear").onclick = () => { strokes = []; live = null; me.strokes = []; saveMe(); drawPad(); };
+addEventListener("resize", () => { if (!$("joinView").hidden) sizePad(); });
+/* compact SVG path, cropped to the ink */
+function padPath(){
+  if (!strokes.length) return null;
+  const pts = strokes.flat(); let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [x,y] of pts){ x0 = Math.min(x0,x); y0 = Math.min(y0,y); x1 = Math.max(x1,x); y1 = Math.max(y1,y); }
+  const pad = 12, f = n => Math.round(n);
+  const d = strokes.map(st => {
+    let out = `M${f(st[0][0])} ${f(st[0][1])}`;
+    if (st.length === 1) return out + ` L${f(st[0][0]) + 1} ${f(st[0][1])}`;
+    for (let i = 1; i < st.length - 1; i++) out += ` Q${f(st[i][0])} ${f(st[i][1])} ${f((st[i][0]+st[i+1][0])/2)} ${f((st[i][1]+st[i+1][1])/2)}`;
+    const l = st.at(-1); return out + ` L${f(l[0])} ${f(l[1])}`;
+  }).join(" ");
+  return { v: `${f(x0 - pad)} ${f(y0 - pad)} ${f(x1 - x0 + pad*2)} ${f(y1 - y0 + pad*2)}`, d };
+}
+
+/* ---------- picture: premade icon or a photo, shrunk on the phone ---------- */
+const CAM = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>';
+function paintPicks(){
+  const g = $("picGrid"); g.innerHTML = "";
+  for (const id of ICON_IDS){
+    const b = document.createElement("button"); b.type = "button"; b.className = "pick";
+    b.setAttribute("aria-label", ICON_LABELS[id]); b.setAttribute("aria-pressed", me.pic === "icon:" + id);
+    b.appendChild(avatarEl("icon:" + id, "", 46));
+    b.onclick = () => { me.pic = "icon:" + id; saveMe(); paintPicks(); };
+    g.appendChild(b);
+  }
+  const ph = document.createElement("button"); ph.type = "button"; ph.className = "pick photo";
+  const isPhoto = !!(me.pic && me.pic.startsWith("data:"));
+  ph.setAttribute("aria-pressed", isPhoto); ph.setAttribute("aria-label", isPhoto ? "Your photo (tap to change)" : "Use a photo");
+  if (isPhoto) ph.appendChild(avatarEl(me.pic, "", 46)); else { ph.innerHTML = CAM + "<span>Photo</span>"; }
+  ph.onclick = () => $("photoIn").click();
+  g.appendChild(ph);
+}
+$("photoIn").addEventListener("change", async () => {
+  const file = $("photoIn").files[0]; $("photoIn").value = "";
+  if (!file) return;
+  try {
+    const url = URL.createObjectURL(file), img = new Image(); img.src = url; await img.decode();
+    const w = img.naturalWidth, h = img.naturalHeight, side = Math.min(w, h), S = 192;
+    const cv = document.createElement("canvas"); cv.width = cv.height = S;
+    cv.getContext("2d").drawImage(img, (w - side) / 2, (h - side) / 2, side, side, 0, 0, S, S);
+    URL.revokeObjectURL(url);
+    let data = cv.toDataURL("image/jpeg", .8);
+    if (data.length > 60000) data = cv.toDataURL("image/jpeg", .6);
+    me.pic = data; saveMe(); paintPicks(); $("joinErr").textContent = "";
+  } catch(e){ $("joinErr").textContent = "Couldn't read that photo. Try another one, or pick an icon."; }
+});
 
 function startHeartbeat(){
   clearInterval(heartbeat);
@@ -219,7 +517,10 @@ function startListening(){
   if (stop) stop();
   stop = db.listen(`games/${code}`, data => {
     game = data;
-    if (joined && (!game || !game.teams || !game.teams[me.tid])) { showJoin("The host removed your team. Join again if that was a mistake."); return; }
+    if (joined && game && !(game.teams && game.teams[me.tid])) {
+      showJoin(game.full && game.full[me.tid] ? "This game is full, so your team wasn't added. Check with the host." : "The host removed your team. Join again if that was a mistake.");
+      return;
+    }
     render();
   }, setConn);
 }
@@ -231,7 +532,7 @@ function state(){
   const out = !!(r.out && r.out[me.tid]);
   return { r, mine, out };
 }
-function canBuzz(){ const { r, mine, out } = state(); return joined && r.status === "open" && !out && !mine && pendingRid !== r.rid; }
+function canBuzz(){ const { r, mine, out } = state(); return joined && conn === "live" && r.status === "open" && !out && !mine && pendingRid !== r.rid; }
 let actx = null;
 function click(){
   try { actx = actx || new (window.AudioContext || window.webkitAudioContext)();
@@ -256,12 +557,187 @@ document.addEventListener("keydown", e => {
   if (e.code === "Space" || e.key === "Enter"){ e.preventDefault(); buzz(); }
 });
 
+/* ---------- picking the next clue (team in control) ---------- */
+/* ---------- Final Jeopardy ---------- */
+let fjDraft = { id:null, wager:"", resp:"" }, fjBusy = false;
+function fjMine(F){ return (game.finalIn && game.finalIn[F.id] && game.finalIn[F.id][me.tid]) || {}; }
+function renderFinal(F){
+  if (fjDraft.id !== F.id) fjDraft = { id:F.id, wager:"", resp:"" };
+  $("fjpCat").textContent = F.cat || "";
+  const body = $("fjpBody"), mine = fjMine(F), my = F.teams && F.teams[me.tid], res = F.results && F.results[me.tid];
+  const key = JSON.stringify([F.status, !!my, mine.locked, mine.wager, (mine.resp || "").length > 0, res, fjBusy]);
+  if (body.dataset.k === key) return; body.dataset.k = key;
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
+  body.replaceChildren();
+  if (!my){ body.append(el("p", "fjp-note", "Your team needs more than $0 to play Final Jeopardy. Watch the board!")); return; }
+  const max = my.max;
+  if (F.status === "wager"){
+    if (mine.locked){
+      body.append(el("div", "fjp-big good", `Wager locked: $${(+mine.wager).toLocaleString()}`), el("p", "fjp-note", "You can change it until the host reveals the clue."));
+      const ch = el("button", "link", "Change wager"); ch.type = "button";
+      ch.onclick = () => { fjDraft.wager = String(mine.wager); db.patch(`games/${code}/finalIn/${F.id}/${me.tid}`, { locked:false }).catch(()=>{}); };
+      body.append(ch); return;
+    }
+    body.append(el("p", "fjp-note", `You have $${max.toLocaleString()}. Wager any amount from $0 to $${max.toLocaleString()}. Only the host's board will know.`));
+    const box = el("label", "fjp-money"); box.append(el("span", "", "$"));
+    const inp = document.createElement("input"); inp.inputMode = "numeric"; inp.autocomplete = "off"; inp.placeholder = "0"; inp.value = fjDraft.wager; inp.setAttribute("aria-label", "Your wager");
+    inp.oninput = () => { inp.value = inp.value.replace(/[^0-9]/g, "").slice(0, 7); fjDraft.wager = inp.value; err.textContent = ""; };
+    box.append(inp);
+    const err = el("div", "err"); err.setAttribute("role", "alert");
+    const go = el("button", "btn", "Lock in wager"); go.type = "button";
+    const allIn = el("button", "link", `Bet it all ($${max.toLocaleString()})`); allIn.type = "button";
+    allIn.onclick = () => { inp.value = String(max); fjDraft.wager = inp.value; inp.focus(); };
+    go.onclick = async () => {
+      const w = Math.floor(+inp.value || 0);
+      if (inp.value === ""){ err.textContent = "Enter a wager, even if it's $0."; return; }
+      if (w > max){ err.textContent = `The most you can wager is $${max.toLocaleString()}.`; return; }
+      fjBusy = true; render();
+      try { await db.patch(`games/${code}/finalIn/${F.id}/${me.tid}`, { wager:w, locked:true }); if (navigator.vibrate) navigator.vibrate(40); }
+      catch(e){ err.textContent = "Wager didn't send. Try again."; }
+      fjBusy = false; render();
+    };
+    inp.onkeydown = e => { if (e.key === "Enter") go.click(); };
+    body.append(box, err, go, allIn);
+    return;
+  }
+  if (F.status === "answer"){
+    body.append(el("p", "fjp-note", "Read the clue on the board, then type your response. You can change it until time's up."));
+    const ta = document.createElement("textarea"); ta.maxLength = 140; ta.placeholder = "What is…"; ta.value = fjDraft.resp || mine.resp || ""; ta.setAttribute("aria-label", "Your response");
+    ta.oninput = () => { fjDraft.resp = ta.value; };
+    const go = el("button", "btn", mine.resp ? "Update response" : "Submit response"); go.type = "button";
+    const note = el("div", "fjp-note", mine.resp ? `Submitted: “${mine.resp}”` : "");
+    go.onclick = async () => {
+      const r = ta.value.trim(); if (!r){ ta.focus(); return; }
+      fjDraft.resp = r; fjBusy = true; render();
+      try { await db.patch(`games/${code}/finalIn/${F.id}/${me.tid}`, { resp:r }); if (navigator.vibrate) navigator.vibrate(40); }
+      catch(e){ note.textContent = "Response didn't send. Try again."; }
+      fjBusy = false; render();
+    };
+    body.append(ta, go, note);
+    return;
+  }
+  if (res){
+    const good = res.r === "right";
+    body.append(el("div", "fjp-big " + (good ? "good" : "bad"), good ? `Correct! +$${(+res.w).toLocaleString()}` : `Incorrect. −$${(+res.w).toLocaleString()}`));
+  } else body.append(el("div", "fjp-big", "Responses are in"), el("p", "fjp-note", "Watch the board for the reveal."));
+}
+
+/* ---------- coin toss ---------- */
+function myTossFlips(ts){
+  const o = (game.tossFlips && game.tossFlips[ts.id] && game.tossFlips[ts.id][me.tid]) || {};
+  return Object.keys(o).sort().map(k => o[k]);
+}
+function tossInfo(){
+  const ts = game && game.toss;
+  if (!ts || !ts.id || ts.status !== "open") return null;
+  const part = (ts.teams || []).includes(me.tid);
+  const fl = part ? myTossFlips(ts) : [];
+  const need = 5 + (ts.tb && (ts.tied || []).includes(me.tid) ? ts.tb : 0);
+  return { ts, part, fl, need };
+}
+function renderToss(I){
+  const { ts, part, fl, need } = I, done = fl.length >= need;
+  const tbMe = ts.tb && (ts.tied || []).includes(me.tid);
+  $("tossTitle").textContent = tbMe && done === false ? "Tiebreaker!" : "Coin toss";
+  if (!part) $("tossSub").textContent = "The coin toss is on. Your team joined after it started.";
+  else if (tossBusy) $("tossSub").textContent = "Flipping…";
+  else if (!done) $("tossSub").textContent = tbMe ? "Sudden death: call it!" : `Flip ${fl.length + 1} of 5: call it!`;
+  else $("tossSub").textContent = `Done: ${fl.filter(f => f.call === f.side).length} correct. Waiting for the other teams…`;
+  document.querySelectorAll(".call").forEach(b => b.disabled = !part || done || tossBusy);
+  $("callRow").hidden = !part || done;
+  const tl = $("tally"), key = JSON.stringify(fl);
+  if (tl.dataset.k !== key){
+    tl.dataset.k = key; tl.replaceChildren();
+    for (let i = 0; i < Math.max(5, need); i++){
+      const f = fl[i], sp = document.createElement("span");
+      if (f){ sp.className = f.call === f.side ? "hit" : "miss"; const im = document.createElement("img"); im.alt = ""; im.src = f.side === "H" ? "assets/coin-heads.jpg" : "assets/coin-tails.jpg"; sp.appendChild(im); }
+      tl.appendChild(sp);
+    }
+  }
+  if (!tossBusy && !lastFlip) $("tossRes").textContent = "";
+}
+function rand01(){ const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] & 1; }
+async function doFlip(call){
+  const I = tossInfo(); if (!I || !I.part || tossBusy || I.fl.length >= I.need) return;
+  tossBusy = true; lastFlip = null; $("tossRes").textContent = ""; $("tossRes").className = "toss-res"; render();
+  const side = rand01() ? "H" : "T", idx = I.fl.length;
+  if (navigator.vibrate) navigator.vibrate(30);
+  const base = coinAngle - (((coinAngle % 360) + 360) % 360);
+  const next = base + 360 * 5 + (side === "H" ? 0 : 180);
+  const RMq = matchMedia("(prefers-reduced-motion: reduce)").matches, dur = RMq ? 10 : 1600;
+  const coin = $("coin");
+  try {
+    if (!RMq) $("coinHop").animate([{transform:"translateY(0) scale(1)"},{transform:"translateY(-120px) scale(1.12)", offset:.45},{transform:"translateY(0) scale(1)"}], {duration:dur, easing:"cubic-bezier(.3,.6,.4,1)"});
+    await coin.animate([{transform:`rotateX(${coinAngle}deg)`},{transform:`rotateX(${next}deg)`}], {duration:dur, easing:"cubic-bezier(.2,.7,.25,1)", fill:"forwards"}).finished;
+  } catch(e){}
+  coinAngle = next; coin.style.transform = `rotateX(${next}deg)`;
+  coin.getAnimations().forEach(a => a.cancel());
+  const win = call === side;
+  lastFlip = { call, side };
+  $("tossRes").textContent = (side === "H" ? "Heads" : "Tails") + (win ? "! You called it" : ". Missed this one");
+  $("tossRes").className = "toss-res " + (win ? "good" : "bad");
+  if (navigator.vibrate) navigator.vibrate(win ? [40, 60, 40] : 120);
+  try { await db.put(`games/${code}/tossFlips/${I.ts.id}/${me.tid}/f${String(idx).padStart(2, "0")}`, { call, side }); }
+  catch(e){ $("tossRes").textContent = "Flip didn't send. Try again."; $("tossRes").className = "toss-res bad"; }
+  tossBusy = false; render();
+}
+document.querySelectorAll(".call").forEach(b => b.onclick = () => doFlip(b.dataset.c));
+
+function renderPicker(bd){
+  const list = $("pickList"), cats = bd.cats, left = bd.left || {}, vals = bd.values || [];
+  const first = game.toss && game.toss.status === "done" && game.toss.winner === me.tid && Object.values(left).every(a => a.every(Boolean));
+  $("pickTitle").textContent = first ? "You won the toss!" : "Your pick!";
+  const key = JSON.stringify([pickCat, pickSent, left]);
+  if (list.dataset.k === key) return; list.dataset.k = key;
+  list.replaceChildren();
+  if (pickSent){
+    list.className = "pick-list"; $("pickSub").textContent = "Opening your clue…"; $("pickBack").hidden = true; return;
+  }
+  if (pickCat === null || !(left[pickCat] || []).some(Boolean)){
+    pickCat = null; list.className = "pick-list"; $("pickSub").textContent = "Choose a category"; $("pickBack").hidden = true;
+    cats.forEach((name, ci) => {
+      const n = (left[ci] || []).filter(Boolean).length;
+      const b = document.createElement("button"); b.type = "button"; b.className = "cat-btn"; b.disabled = !n;
+      const nmS = document.createElement("span"); nmS.textContent = name;
+      const sm = document.createElement("small"); sm.textContent = n ? `${n} left` : "done";
+      b.append(nmS, sm); b.onclick = () => { pickCat = ci; render(); const f = $("pickList").querySelector("button"); if (f) f.focus(); };
+      list.appendChild(b);
+    });
+  } else {
+    list.className = "pick-list vals"; $("pickSub").textContent = cats[pickCat]; $("pickBack").hidden = false;
+    vals.forEach((v, r) => {
+      if (!(left[pickCat] || [])[r]) return;
+      const b = document.createElement("button"); b.type = "button"; b.className = "val-btn"; b.textContent = "$" + v;
+      b.setAttribute("aria-label", `${cats[pickCat]} for $${v}`);
+      b.onclick = () => sendPick(`${pickCat}-${r}`);
+      list.appendChild(b);
+    });
+  }
+}
+function sendPick(k){
+  if (pickSent) return;
+  pickSent = k; render();
+  if (navigator.vibrate) navigator.vibrate(40);
+  db.put(`games/${code}/pick`, { id: Math.random().toString(36).slice(2, 10), tid: me.tid, key: k, at:{".sv":"timestamp"} })
+    .catch(() => { pickSent = null; render(); $("pickSub").textContent = "Pick didn't send. Try again."; });
+  setTimeout(() => { if (pickSent === k){ pickSent = null; render(); } }, 6000);   // board didn't open it (e.g. host busy): let them pick again
+}
+$("pickBack").onclick = () => { pickCat = null; render(); };
+
 /* ---------- render ---------- */
+function setText(el, t){ if (el.textContent !== t) el.textContent = t; }   // don't re-announce unchanged status
 function render(){
-  if (!joined) return;
+  if (!joined || renaming) return;
   const { r, mine, out } = state();
   const t = (game && game.teams) || {};
-  $("teamName").textContent = (t[me.tid] && t[me.tid].name) || me.name || "";
+  const meT = t[me.tid] || {}, nm = meT.name || me.name || "";
+  const lookKey = JSON.stringify([nm, meT.pic || "", meT.sig || ""]);
+  if ($("teamName").dataset.k !== lookKey){
+    $("teamName").dataset.k = lookKey;
+    $("meAv").replaceChildren(avatarEl(meT.pic, nm, 64));
+    const sg = signatureEl(meT.sig, nm);
+    $("teamName").replaceChildren(sg || document.createTextNode(nm));
+  }
   $("clueTxt").innerHTML = "";
   if (r.status && r.status !== "idle" && r.cat){
     $("clueTxt").textContent = r.cat;
@@ -271,6 +747,23 @@ function render(){
   const btn = $("buzzBtn"), st = $("statusTxt");
   btn.className = "buzz"; st.className = "status";
   let label = "Wait", text = "", live = false;
+  if (conn !== "live"){
+    btn.textContent = label; btn.disabled = true; btn.setAttribute("aria-label", "Buzzer unavailable");
+    setText(st, conn === "error" ? "Can't reach the game" : "Reconnecting…"); st.classList.add("bad");
+    return;
+  }
+  const fjI = game && game.final && game.final.id ? game.final : null;
+  $("fjPanel").hidden = !fjI;
+  if (fjI){ $("tossPanel").hidden = true; $("pickPanel").hidden = true; btn.hidden = true; document.querySelector("#playView .hint").hidden = true; $("clueTxt").textContent = ""; renderFinal(fjI); setText(st, ""); return; }
+  const tsI = tossInfo();
+  $("tossPanel").hidden = !tsI;
+  if (tsI){ $("pickPanel").hidden = true; btn.hidden = true; document.querySelector("#playView .hint").hidden = true; renderToss(tsI); setText(st, ""); return; }
+  const bd = (game && game.board) || null;
+  const idle = !r.status || r.status === "idle";
+  const myPick = idle && bd && bd.control === me.tid && Array.isArray(bd.cats) && Object.values(bd.left || {}).some(a => a.some(Boolean));
+  $("pickPanel").hidden = !myPick; btn.hidden = !!myPick; document.querySelector("#playView .hint").hidden = !!myPick;
+  if (!idle){ pickCat = null; pickSent = null; }
+  if (myPick){ renderPicker(bd); setText(st, ""); return; }
   const order = r.rid && game.buzzes && game.buzzes[r.rid] ? Object.entries(game.buzzes[r.rid]).sort((a,b) => a[1].at - b[1].at).map(x => x[0]) : [];
   if (r.status === "open"){
     if (out){ text = "Locked out on this clue"; st.classList.add("bad"); }
@@ -287,11 +780,13 @@ function render(){
     text = r.first === me.tid && r.result === "correct" ? "Correct!" : "Clue closed";
     if (r.first === me.tid && r.result === "correct") st.classList.add("good");
   } else {
-    text = "Waiting for the next clue";
+    const who = bd && bd.control && bd.control !== me.tid && t[bd.control] && t[bd.control].name;
+    const wonToss = !!game && !!game.toss && game.toss.status === "done" && game.toss.winner === bd?.control && Object.values(bd?.left || {}).every(a => a.every(Boolean));
+    text = who ? (wonToss ? `${who} won the coin toss and is picking the first clue…` : `${who} is picking the next clue…`) : "Waiting for the next clue";
   }
   btn.textContent = label; btn.disabled = !live;
   btn.setAttribute("aria-label", live ? "Buzz in" : label);
-  st.textContent = text;
+  setText(st, text);
 }
 
 /* ---------- start ---------- */
